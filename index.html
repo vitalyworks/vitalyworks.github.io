@@ -61,6 +61,7 @@
             color: #e2e8f0;
             overflow-x: hidden;
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease;
         }
 
         /* Noise Texture - Bottom Layer */
@@ -75,12 +76,13 @@
             opacity: 0.05;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             mix-blend-mode: overlay;
+            transition: opacity 0.3s;
         }
 
         /* 2. Premium Glassmorphism (Performance Tuned) */
         .glass-panel {
             background: rgba(15, 23, 42, 0.6);
-            /* Reduced blur for rendering performance */
+            /* Standard state: Blur 12px for look */
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -90,11 +92,33 @@
             /* Force GPU acceleration */
             transform: translateZ(0);
             backface-visibility: hidden;
-            will-change: transform;
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+            will-change: transform, opacity;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
         }
 
-        /* 3. Spotlight Interaction Logic */
+        /* 3. CINEMA MODE (GPU OFF-LOADING) 
+           When a video is active, we disable expensive painting operations 
+           to give 100% resources to the video decoder/renderer.
+        */
+        body.is-video-active .aurora-blob {
+            display: none !important;
+        }
+
+        body.is-video-active .bg-noise {
+            display: none !important;
+        }
+
+        body.is-video-active .glass-panel {
+            /* Disable blur cost */
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            /* Opaque background fallback */
+            background: rgba(15, 23, 42, 0.95) !important;
+            box-shadow: none;
+            border-color: rgba(255, 255, 255, 0.02);
+        }
+
+        /* 4. Spotlight Interaction Logic */
         .spotlight-card::before {
             content: '';
             position: absolute;
@@ -151,8 +175,8 @@
         .aurora-blob {
             position: absolute;
             border-radius: 50%;
-            /* Reduced blur radius for performance */
-            filter: blur(80px);
+            /* Reduced blur radius (80px -> 60px) for faster compostion */
+            filter: blur(60px);
             opacity: 0.1;
             mix-blend-mode: screen;
             /* Force GPU acceleration */
@@ -163,6 +187,7 @@
         /* Layout Optimization: Isolate render painting */
         .sidebar-element, .content-section {
             contain: layout style;
+            will-change: opacity, transform;
         }
         
         /* Cursor Blink for Typewriter */
@@ -196,11 +221,11 @@
 </head>
 <body class="selection:bg-emerald-500/30 selection:text-emerald-200">
 
-    <!-- Deep Mesh Background -->
+    <!-- Deep Mesh Background (Reduced to 2 Orbs for Stability) -->
     <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#020617]">
         <div class="aurora-blob bg-emerald-950/50 w-[800px] h-[800px] top-[-20%] left-[-10%]" id="orb1"></div>
         <div class="aurora-blob bg-cyan-950/30 w-[900px] h-[900px] bottom-[-20%] right-[-10%]" id="orb2"></div>
-        <div class="aurora-blob bg-emerald-900/20 w-[600px] h-[600px] top-[40%] left-[30%]" id="orb3"></div>
+        <!-- Orb 3 removed for optimization -->
     </div>
     <div class="bg-noise"></div>
 
@@ -214,8 +239,12 @@
                     <!-- Identity -->
                     <div class="w-20 h-20 rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative group">
                          <div class="absolute inset-0 bg-emerald-500/20 blur-xl group-hover:bg-emerald-500/30 transition-colors duration-500"></div>
-                         <!-- V15.1 Logo maintained (object-contain fix) -->
-                        <img src="https://drive.google.com/thumbnail?id=1DK064ut-Kcn79YeZMf86Xywa2C0TWB-N&sz=w200" alt="VitalyWorks Logo" class="w-full h-full object-contain relative z-10">
+                         <!-- V17 Optimization: Fetch Priority & Size -->
+                        <img src="https://drive.google.com/thumbnail?id=1DK064ut-Kcn79YeZMf86Xywa2C0TWB-N&sz=w100" 
+                             alt="VitalyWorks Logo" 
+                             fetchpriority="high"
+                             decoding="async"
+                             class="w-full h-full object-contain relative z-10">
                     </div>
                     
                     <div>
@@ -228,7 +257,7 @@
                         </div>
                     </div>
 
-                    <!-- Knowledge Scales (Telemetry Design: 1px High Intensity) -->
+                    <!-- Knowledge Scales -->
                     <div class="space-y-4 pt-2">
                         <!-- Luau: 100% -->
                         <div class="group">
@@ -463,7 +492,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="glass-panel spotlight-card hover-lift rounded-3xl p-1.5 group">
                             <div class="aspect-[4/3] bg-black rounded-2xl overflow-hidden relative">
-                                <img src="https://drive.google.com/thumbnail?id=1a1wo0C9Sf9ZHsjU_GproNA5gMCoJ8aCp&sz=w2000" alt="Railway Track" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <img src="https://drive.google.com/thumbnail?id=1a1wo0C9Sf9ZHsjU_GproNA5gMCoJ8aCp&sz=w2000" 
+                                     alt="Railway Track" 
+                                     loading="lazy"
+                                     decoding="async"
+                                     class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
                                     <span class="text-white font-bold text-sm tracking-tight">Railway Track Module</span>
                                 </div>
@@ -471,7 +504,11 @@
                         </div>
                         <div class="glass-panel spotlight-card hover-lift rounded-3xl p-1.5 group">
                             <div class="aspect-[4/3] bg-black rounded-2xl overflow-hidden relative">
-                                <img src="https://drive.google.com/thumbnail?id=1PBLWneZEqn7IxVpoNK-JAhl8wf0bq0BD&sz=w2000" alt="Airport Seating" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <img src="https://drive.google.com/thumbnail?id=1PBLWneZEqn7IxVpoNK-JAhl8wf0bq0BD&sz=w2000" 
+                                     alt="Airport Seating" 
+                                     loading="lazy"
+                                     decoding="async"
+                                     class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
                                     <span class="text-white font-bold text-sm tracking-tight">Airport Seating Module</span>
                                 </div>
@@ -570,9 +607,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
+            
+            // 1. Cap Framerate for Stability
+            gsap.ticker.fps(60);
+            
             gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrollToPlugin);
 
-            // 1. Initialize Project Scroll (Tactile Feedback & Spotlight Arrival)
+            // 2. Initialize Project Scroll (Tactile Feedback & Spotlight Arrival)
             const initBtn = document.getElementById('init-btn');
             const initBtnText = initBtn.querySelector('span');
             
@@ -608,7 +649,7 @@
                 }, 400);
             });
 
-            // 2. Discord Copy Logic & Pulse
+            // 3. Discord Copy Logic & Pulse
             const discordTile = document.getElementById('discord-tile');
             const feedback = document.getElementById('copy-feedback');
             const copyHint = document.getElementById('copy-hint');
@@ -639,7 +680,7 @@
                 }
             });
 
-            // 3. System Monitor Pulse (Sidebar Scales)
+            // 4. System Monitor Pulse (Sidebar Scales)
             gsap.to(".system-monitor-pulse", {
                 opacity: 0.6,
                 duration: 2,
@@ -648,7 +689,8 @@
                 ease: "sine.inOut"
             });
 
-            // 4. Deep Mesh Animation (Hypnotic & Slow)
+            // 5. Deep Mesh Animation (Hypnotic & Slow)
+            // Reduced to 2 active orbs to save GPU cycles
             const orbs = document.querySelectorAll('.aurora-blob');
             orbs.forEach((orb, i) => {
                 gsap.to(orb, {
@@ -662,7 +704,7 @@
                 });
             });
 
-            // 5. Typewriter Effect (Simpler Professional Roles)
+            // 6. Typewriter Effect (Simpler Professional Roles)
             const roles = ["Luau Systems Architect", "Gameplay Logic Engineer", "Professional Roblox Developer"];
             let roleTl = gsap.timeline({repeat: -1});
             
@@ -680,7 +722,7 @@
                 });
             });
 
-            // 6. Spotlight & Magnetic (Subtle 0.08)
+            // 7. Spotlight & Magnetic (Subtle 0.08)
             const cards = document.querySelectorAll('.spotlight-card');
             cards.forEach(card => {
                 card.addEventListener('mousemove', e => {
@@ -707,7 +749,7 @@
                 });
             });
 
-            // 7. Entrance Bloom
+            // 8. Entrance Bloom
             const tl = gsap.timeline();
             tl.to('.sidebar-element', { x: 0, opacity: 1, duration: 1.2, ease: "power3.out" });
             tl.to('.content-section', {
@@ -732,16 +774,19 @@
                 }
             });
 
-            // 8. Robust Video Facade (Error 153 Fix + AutoPlay + Attributes)
+            // 9. Robust Video Facade (Cinema Mode: GPU Offloading)
             const containers = document.querySelectorAll('.video-container');
             containers.forEach(container => {
                 container.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    // Removed origin parameter to fix local dev Error 153.
-                    // Added extensive allow list for modern browser support.
+                    
+                    // ACTIVATE CINEMA MODE: Disables aurora blobs and backdrop blur to free GPU
+                    document.body.classList.add('is-video-active');
+                    
+                    // Added &vq=hd720 to force stable quality and prevent stutter
                     const iframeHTML = `
                         <iframe 
-                            src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" 
+                            src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&controls=1&vq=hd720" 
                             class="absolute inset-0 w-full h-full" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
