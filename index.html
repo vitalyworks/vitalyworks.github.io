@@ -77,17 +77,21 @@
             mix-blend-mode: overlay;
         }
 
-        /* 2. Premium Glassmorphism (Borderless Look) */
+        /* 2. Premium Glassmorphism (Performance Tuned) */
         .glass-panel {
             background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05); /* Minimalist */
+            /* Reduced blur for rendering performance */
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 10px 40px -10px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+            /* Force GPU acceleration */
+            transform: translateZ(0);
+            backface-visibility: hidden;
             will-change: transform;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
         }
 
         /* 3. Spotlight Interaction Logic */
@@ -143,12 +147,16 @@
             border-color: rgba(16, 185, 129, 0.3);
         }
 
+        /* Performance Tuned Aurora */
         .aurora-blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.1; /* Reduced opacity for subtlety */
+            /* Reduced blur radius for performance */
+            filter: blur(80px);
+            opacity: 0.1;
             mix-blend-mode: screen;
+            /* Force GPU acceleration */
+            transform: translateZ(0);
             will-change: transform;
         }
         
@@ -201,7 +209,7 @@
                     <!-- Identity -->
                     <div class="w-20 h-20 rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative group">
                          <div class="absolute inset-0 bg-emerald-500/20 blur-xl group-hover:bg-emerald-500/30 transition-colors duration-500"></div>
-                         <!-- V15.1 Logo Update -->
+                         <!-- V15.1 Logo maintained -->
                         <img src="https://drive.google.com/thumbnail?id=1DK064ut-Kcn79YeZMf86Xywa2C0TWB-N&sz=w200" alt="VitalyWorks Logo" class="w-full h-full object-cover relative z-10">
                     </div>
                     
@@ -305,10 +313,10 @@
 
                     <div class="space-y-16">
                         
-                        <!-- 1. Loadout -->
+                        <!-- 1. Loadout (Thumbnail: hqdefault) -->
                         <article class="glass-panel spotlight-card magnetic-card hover-lift rounded-3xl overflow-hidden p-2 group">
                             <div class="video-container relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-white/5 cursor-pointer" data-id="7T632QTKcLM">
-                                <img src="https://img.youtube.com/vi/7T632QTKcLM/maxresdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Loadout System">
+                                <img src="https://img.youtube.com/vi/7T632QTKcLM/hqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Loadout System">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30 play-btn-pulse group-hover:scale-110 transition-transform">
@@ -332,10 +340,10 @@
                             </div>
                         </article>
 
-                        <!-- 2. Rail Movement -->
+                        <!-- 2. Rail Movement (Thumbnail: hqdefault) -->
                         <article class="glass-panel spotlight-card magnetic-card hover-lift rounded-3xl overflow-hidden p-2 group">
                             <div class="video-container relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-white/5 cursor-pointer" data-id="0qQ7Zx0MZ6w">
-                                <img src="https://img.youtube.com/vi/0qQ7Zx0MZ6w/maxresdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Rail Movement">
+                                <img src="https://img.youtube.com/vi/0qQ7Zx0MZ6w/hqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Rail Movement">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30 play-btn-pulse group-hover:scale-110 transition-transform">
@@ -358,10 +366,10 @@
                             </div>
                         </article>
 
-                        <!-- 3. Teleport -->
+                        <!-- 3. Teleport (Thumbnail: hqdefault) -->
                         <article class="glass-panel spotlight-card magnetic-card hover-lift rounded-3xl overflow-hidden p-2 group">
                             <div class="video-container relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-white/5 cursor-pointer" data-id="BNZzi_ZlItE">
-                                <img src="https://img.youtube.com/vi/BNZzi_ZlItE/maxresdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Teleport">
+                                <img src="https://img.youtube.com/vi/BNZzi_ZlItE/hqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Teleport">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30 play-btn-pulse group-hover:scale-110 transition-transform">
@@ -384,10 +392,10 @@
                             </div>
                         </article>
 
-                        <!-- 4. Global Effects -->
+                        <!-- 4. Global Effects (Thumbnail: hqdefault) -->
                         <article class="glass-panel spotlight-card magnetic-card hover-lift rounded-3xl overflow-hidden p-2 group">
                             <div class="video-container relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-white/5 cursor-pointer" data-id="M-epE99_jNA">
-                                <img src="https://img.youtube.com/vi/M-epE99_jNA/maxresdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Effects">
+                                <img src="https://img.youtube.com/vi/M-epE99_jNA/hqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Effects">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30 play-btn-pulse group-hover:scale-110 transition-transform">
@@ -410,10 +418,10 @@
                             </div>
                         </article>
 
-                        <!-- 5. Push System -->
+                        <!-- 5. Push System (Thumbnail: hqdefault) -->
                         <article class="glass-panel spotlight-card magnetic-card hover-lift rounded-3xl overflow-hidden p-2 group">
                             <div class="video-container relative w-full aspect-video bg-slate-950 rounded-3xl overflow-hidden border border-white/5 cursor-pointer" data-id="DzkPajakyf8">
-                                <img src="https://img.youtube.com/vi/DzkPajakyf8/maxresdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Push System">
+                                <img src="https://img.youtube.com/vi/DzkPajakyf8/hqdefault.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" alt="Push System">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 rounded-full bg-emerald-500/20 backdrop-blur-md flex items-center justify-center border border-emerald-500/30 play-btn-pulse group-hover:scale-110 transition-transform">
@@ -531,7 +539,7 @@
                             </div>
                             <div class="flex-grow">
                                 <div class="text-[10px] text-slate-400 font-mono uppercase tracking-widest">Discord</div>
-                                <div class="text-white font-bold font-sans text-lg tracking-tight group-hover:text-[#5865F2] transition-colors">@vitalikstudio</div>
+                                <div class="text-white font-bold font-sans text-lg tracking-tight group-hover:text-[#5865F2] transition-colors">@vitalyworks</div>
                             </div>
                             <div id="copy-hint" class="text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity absolute right-6 font-mono text-xs">Click to Copy</div>
                             
@@ -602,7 +610,7 @@
 
             // Copy Action
             discordTile.addEventListener('click', () => {
-                navigator.clipboard.writeText('@vitalikstudio').then(() => {
+                navigator.clipboard.writeText('@vitalyworks').then(() => {
                     // Flash success
                     feedback.style.opacity = '1';
                     feedback.querySelector('span').classList.add('animate-fade-out');
@@ -685,11 +693,12 @@
                         x: (e.clientX - rect.left - rect.width / 2) * 0.08,
                         y: (e.clientY - rect.top - rect.height / 2) * 0.08,
                         duration: 0.4,
+                        overwrite: true, // Optimized for performance
                         ease: "power2.out"
                     });
                 });
                 el.addEventListener('mouseleave', () => {
-                    gsap.to(el, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.4)" });
+                    gsap.to(el, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.4)", overwrite: true });
                 });
             });
 
