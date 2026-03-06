@@ -218,6 +218,7 @@
         ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.2); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(52, 211, 153, 0.6); }
     </style>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body class="selection:bg-emerald-500/30 selection:text-emerald-200">
 
@@ -310,40 +311,75 @@
             <!-- MAIN STREAM -->
             <main class="lg:col-span-8 space-y-24">
                 
-                <!-- 1. THE VALUE LOOP (Top Entry) -->
+                <!-- A. NEW HERO SECTION -->
+                <section class="content-section opacity-0 translate-y-5">
+                    <h2 class="text-5xl lg:text-6xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+                        Roblox Scripting Services
+                    </h2>
+                    <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                        Clean, maintainable scripting that fits your existing code style. 2 years of Luau experience, delivering scalable systems.
+                    </p>
+                </section>
+
+                <!-- B. SERVICES & EXPERTISE -->
                 <section class="content-section opacity-0 translate-y-5">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="h-px bg-white/10 flex-grow"></div>
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">The Value Loop</span>
+                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest">Services & Expertise</span>
                         <div class="h-px bg-white/10 w-8"></div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="glass-panel p-8 rounded-3xl hover:border-emerald-500/30 transition-colors duration-500 group">
-                            <i data-lucide="box" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
-                            <h3 class="font-bold text-white text-lg mb-2 tracking-tight group-hover:text-emerald-400 transition-colors">Scalable Foundation</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Systems designed to grow with your game without breaking.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 1. Core Gameplay & AI -->
+                        <div class="glass-panel spotlight-card hover-lift p-8 rounded-3xl group">
+                            <i data-lucide="gamepad-2" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                            <h3 class="font-bold text-white text-lg mb-4 tracking-tight group-hover:text-emerald-400 transition-colors">Core Gameplay & AI</h3>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Simulator / progression systems</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Brainrot-style gameplay</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Combat & enemy AI</li>
+                            </ul>
                         </div>
-                        <div class="glass-panel p-8 rounded-3xl hover:border-emerald-500/30 transition-colors duration-500 group">
-                            <i data-lucide="zap" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
-                            <h3 class="font-bold text-white text-lg mb-2 tracking-tight group-hover:text-emerald-400 transition-colors">Lag-Free Performance</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Optimized code that stays fast even with 100+ players.</p>
+                        <!-- 2. Progression & Economy -->
+                        <div class="glass-panel spotlight-card hover-lift p-8 rounded-3xl group">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                            <h3 class="font-bold text-white text-lg mb-4 tracking-tight group-hover:text-emerald-400 transition-colors">Progression & Economy</h3>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Data saving & persistence</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Economy systems (currencies, shops)</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Inventory / equipment / loadouts</li>
+                            </ul>
                         </div>
-                        <div class="glass-panel p-8 rounded-3xl hover:border-emerald-500/30 transition-colors duration-500 group">
-                            <i data-lucide="file-text" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
-                            <h3 class="font-bold text-white text-lg mb-2 tracking-tight group-hover:text-emerald-400 transition-colors">Clean Integration</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Comprehensive documentation so your team can easily work with my code.</p>
+                        <!-- 3. World Mechanics -->
+                        <div class="glass-panel spotlight-card hover-lift p-8 rounded-3xl group">
+                            <i data-lucide="globe" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                            <h3 class="font-bold text-white text-lg mb-4 tracking-tight group-hover:text-emerald-400 transition-colors">World Mechanics</h3>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Movement & traversal (rail/path, custom controls)</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Teleport / travel systems</li>
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>Global settings / effects control</li>
+                            </ul>
+                        </div>
+                        <!-- 4. Interface & UX -->
+                        <div class="glass-panel spotlight-card hover-lift p-8 rounded-3xl group">
+                            <i data-lucide="layout" class="w-8 h-8 text-emerald-500 mb-4 opacity-80 group-hover:opacity-100 transition-opacity"></i>
+                            <h3 class="font-bold text-white text-lg mb-4 tracking-tight group-hover:text-emerald-400 transition-colors">Interface & UX</h3>
+                            <ul class="space-y-2 text-sm text-slate-400">
+                                <li class="flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-emerald-500/50"></div>UI systems implementation and backend integration</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
 
                 <!-- 2. PROJECT GALLERY -->
                 <section class="content-section opacity-0 translate-y-5">
-                    <div class="flex items-center gap-4 mb-10">
+                    <div class="flex items-center gap-4 mb-6">
                         <div class="h-px bg-white/10 flex-grow"></div>
-                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest">LUAU Scripting & Systems</span>
+                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest">Portfolio: Luau Scripting Works</span>
                         <div class="h-px bg-white/10 w-8"></div>
                     </div>
+                    
+                    <p class="text-slate-400 text-sm mb-8">A selection of production-ready systems and mechanics I have engineered for Roblox games, demonstrating scalable architecture and clean code integration.</p>
 
                     <div class="space-y-16">
                         
@@ -512,6 +548,37 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
                                     <span class="text-white font-bold text-sm tracking-tight">Airport Seating Module</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- D. NEW ABOUT & SKILLS SECTION -->
+                <section class="content-section opacity-0 translate-y-5">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="h-px bg-white/10 flex-grow"></div>
+                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-widest">About & Skills</span>
+                        <div class="h-px bg-white/10 w-8"></div>
+                    </div>
+
+                    <div class="glass-panel spotlight-card rounded-3xl p-8 md:p-10 flex flex-col md:flex-row gap-10">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white tracking-tighter mb-4">About Me</h3>
+                            <ul class="space-y-3 text-sm text-slate-400 leading-relaxed">
+                                <li class="flex items-center gap-3"><i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i> UTC3 timezone</li>
+                                <li class="flex items-center gap-3"><i data-lucide="activity" class="w-4 h-4 text-emerald-500"></i> Online daily</li>
+                                <li class="flex items-center gap-3"><i data-lucide="briefcase" class="w-4 h-4 text-emerald-500"></i> Open for commissions (Light to Medium scope)</li>
+                                <li class="flex items-center gap-3"><i data-lucide="package" class="w-4 h-4 text-emerald-500"></i> Delivery via Team Create, file, zip, or staged commits</li>
+                            </ul>
+                        </div>
+                        <div class="w-px bg-white/10 hidden md:block"></div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white tracking-tighter mb-4">Tech Stack</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-mono border border-transparent text-emerald-400">Roblox scripting luau</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-mono border border-transparent text-cyan-400">Python</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-mono border border-transparent text-blue-400">C++</span>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-mono border border-transparent text-slate-300">Roblox building</span>
                             </div>
                         </div>
                     </div>
@@ -802,5 +869,6 @@
             });
         });
     </script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
