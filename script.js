@@ -193,11 +193,12 @@ const YT_RES = {
   'dHpgWTrwQ_k': 'ytPursuit',
 };
 function ytThumb(id) {
-  const RES = (typeof window !== 'undefined' && window.__resources) || {};
-  const inlined = RES[YT_RES[id]];
+  // Use hqdefault.jpg directly: it always exists, loads instantly, and looks
+  // good at the small thumbnail sizes we display. maxresdefault is unreliable
+  // (returns a 120x90 placeholder for low-res uploads instead of a 404).
   return {
-    src: inlined || `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
-    fallback: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    src: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    fallback: `https://i.ytimg.com/vi/${id}/default.jpg`,
   };
 }
 
