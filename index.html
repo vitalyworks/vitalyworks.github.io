@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VitalyWorks — Roblox Studio scripter</title>
+    <meta
+      name="description"
+      content="Roblox Studio scripter with three years of experience. Systems of any complexity in Luau."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VitalyWorks — Roblox Studio scripter" />
+    <meta
+      property="og:description"
+      content="Three years in Luau. Roblox Studio systems built end to end."
+    />
+    <meta property="og:image" content="media/posters/hero.jpg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=33cba8b" />
+    <link rel="stylesheet" href="style.css?v=20260810-2" />
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <main class="site">
+      <header class="topbar">
+        <a class="brand" href="#top">
+          <img class="app-brand-icon" src="favicon.svg?v=33cba8b" alt="" />
+          <span>VitalyWorks</span>
+        </a>
+        <nav class="topnav" aria-label="Sections" data-i18n-aria="a11y.sections">
+          <a href="#works" data-i18n="nav.works">Work</a>
+          <a href="#stack" data-i18n="nav.stack">What I do</a>
+          <a href="#payment" data-i18n="nav.payment">Payment</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        </nav>
+        <div class="top-actions">
+          <div
+            class="lang-switch"
+            role="group"
+            aria-label="Language"
+            data-i18n-aria="a11y.language"
+          >
+            <button type="button" class="lang-option" data-lang="en">EN</button>
+            <button type="button" class="lang-option" data-lang="ru">RU</button>
+          </div>
+          <a class="primary compact-auth" href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer" data-i18n="nav.cta">
+            Message on Discord
+          </a>
+        </div>
+      </header>
+
+      <section class="hero" id="top">
+        <div class="hero-copy" data-reveal>
+          <span class="hero-badge">
+            <i></i><span data-i18n="hero.badge">Open for commissions</span>
+          </span>
+          <h1 data-i18n-html="hero.title">
+            I make <em>Roblox Studio systems</em> for any task and any complexity
+          </h1>
+          <p data-i18n="hero.lead">
+            I take commissions for game systems in Roblox Studio (Luau), from
+            small jobs to complex systems. I pay close attention to code quality
+            so every system runs reliably and fits cleanly into your project.
+            Over three years of experience.
+          </p>
+          <div class="hero-actions">
+            <a class="primary hero-button" href="#works" data-i18n="hero.ctaPrimary">
+              View work
+            </a>
+            <a class="secondary hero-button" href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaSecondary">
+              Start a project
+            </a>
+          </div>
+          <ul class="hero-points">
+            <li>
+              <strong data-i18n="hero.point1.title">3 years</strong>
+              <span data-i18n="hero.point1.text">In Roblox Studio</span>
+            </li>
+            <li>
+              <strong data-i18n="hero.point2.title">Simulators</strong>
+              <span data-i18n="hero.point2.text">Main specialization</span>
+            </li>
+            <li>
+              <strong data-i18n="hero.point3.title">Luau</strong>
+              <span data-i18n="hero.point3.text">Modular server-side code</span>
+            </li>
+          </ul>
+        </div>
+        <div class="hero-shot" aria-hidden="true">
+          <div class="shot-frame">
+            <img src="media/posters/hero.jpg" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="works" id="works">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="works.kicker">Work</span>
+          <h2 data-i18n="works.title">
+            Built end to end. See every system in action
+          </h2>
+          <p data-i18n="works.lead">
+            Eight systems shown in action. Click a card to watch the video.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/combat-framework.mp4"
+            data-title-key="works.combat.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/combat-framework.jpg"
+                alt="Ability-based combat system with cooldowns and VFX"
+                data-i18n-alt="works.combat.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">1:18</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.combat.title">Ability-based combat system</strong>
+              <span class="work-text" data-i18n="works.combat.text">
+                A four-slot hotbar with independent cooldowns, a stamina bar and
+                dummies with damage and health bars. Every ability is its own
+                module: animation, hitbox, effects and its own recovery phase.
+              </span>
+              <span class="work-tags" data-i18n-html="works.combat.tags">
+                <em>Combat</em><em>Cooldowns</em><em>Hitboxes</em><em>VFX</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/sukuna-moveset.mp4"
+            data-title-key="works.moveset.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/sukuna-moveset.jpg"
+                alt="Character moveset in the Culling Grounds project"
+                data-i18n-alt="works.moveset.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:30</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.moveset.title">
+                Character moveset — Culling Grounds
+              </strong>
+              <span class="work-text" data-i18n="works.moveset.text">
+                A full ability set for one character: dash, block, Cleave,
+                Dismantle, Spider Web and Dissolve. Animations, effects and
+                hitboxes run through one state controller so moves never
+                conflict.
+              </span>
+              <span class="work-tags" data-i18n-html="works.moveset.tags">
+                <em>Moveset</em><em>State machine</em><em>Animation</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/placing-system.mp4"
+            data-title-key="works.placing.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/placing-system.jpg"
+                alt="Object placement system with a live preview"
+                data-i18n-alt="works.placing.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:31</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.placing.title">Placing system</strong>
+              <span class="work-text" data-i18n="works.placing.text">
+                A placement system for positioning objects with a live preview
+                before confirming the final location.
+              </span>
+              <span class="work-tags" data-i18n-html="works.placing.tags">
+                <em>Placement</em><em>Preview</em><em>Objects</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/stands-bob.mp4"
+            data-title-key="works.stands.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/stands-bob.jpg"
+                alt="Stand summoning and combo system in Roblox Studio"
+                data-i18n-alt="works.stands.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:28</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.stands.title">Stand and combo system</strong>
+              <span class="work-text" data-i18n="works.stands.text">
+                Stand summoning, M1 chains with a combo counter, barrage, heavy
+                punch and block. Damage is calculated on the server and the combo
+                resets on timeout — visible right in the Studio test session.
+              </span>
+              <span class="work-tags" data-i18n-html="works.stands.tags">
+                <em>Combo</em><em>Server-side</em><em>Roblox Studio</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/loadout-switcher.mp4"
+            data-title-key="works.loadout.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/loadout-switcher.jpg"
+                alt="Loadout switcher with automatic inventory updates"
+                data-i18n-alt="works.loadout.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:13</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.loadout.title">Loadout switcher</strong>
+              <span class="work-text" data-i18n="works.loadout.text">
+                One-tap switching between item loadouts. The inventory updates
+                automatically when a new option is selected.
+              </span>
+              <span class="work-tags" data-i18n-html="works.loadout.tags">
+                <em>Loadouts</em><em>Inventory</em><em>UI</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/rail-system.mp4"
+            data-title-key="works.rail.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/rail-system.jpg"
+                alt="Rail movement system with slope-aware physics"
+                data-i18n-alt="works.rail.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:22</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.rail.title">Rail system</strong>
+              <span class="work-text" data-i18n="works.rail.text">
+                Players can mount rails and move forward or backward with
+                adjustable speed. Slope-aware physics slows uphill movement and
+                accelerates the player naturally downhill.
+              </span>
+              <span class="work-tags" data-i18n-html="works.rail.tags">
+                <em>Movement</em><em>Physics</em><em>Rails</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/push-system.mp4"
+            data-title-key="works.push.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/push-system.jpg"
+                alt="Robux push purchase system"
+                data-i18n-alt="works.push.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:15</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.push.title">Push system</strong>
+              <span class="work-text" data-i18n="works.push.text">
+                Players can push another player for Robux: pressing the “Push”
+                button (5 Robux) sends the target flying on impact.
+              </span>
+              <span class="work-tags" data-i18n-html="works.push.tags">
+                <em>Robux</em><em>Developer product</em><em>Physics</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/bomber-minigame.mp4"
+            data-title-key="works.bomber.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/bomber-minigame.jpg"
+                alt="Top-down bomber survival minigame"
+                data-i18n-alt="works.bomber.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:21</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.bomber.title">Bomber minigame</strong>
+              <span class="work-text" data-i18n="works.bomber.text">
+                One player marks up to three tiles to detonate while everyone
+                else has five seconds to choose a safe tile. The last survivor
+                becomes the next bomber.
+              </span>
+              <span class="work-tags" data-i18n-html="works.bomber.tags">
+                <em>Minigame</em><em>Rounds</em><em>Top-down</em>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <p class="works-note" data-reveal data-i18n="works.note">
+          Some of the projects I worked on in teams shut down or stayed under
+          NDA, so no footage survived. What is here is solo work I can show in
+          full.
+        </p>
+      </section>
+
+      <section class="features" id="stack">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="stack.kicker">Specialization</span>
+          <h2 data-i18n="stack.title">Mechanics I build</h2>
+          <p data-i18n="stack.lead">
+            Every system is written as a module, so it can be extended or
+            switched off without touching the rest of the game.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 3h-5m5 0v5"/></svg>
+            </div>
+            <strong data-i18n="stack.simulators.title">Simulators</strong>
+            <p data-i18n="stack.simulators.text">
+              Progression, rebirths, multipliers, zones, pets and a balanced
+              growth curve.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5 5 13v6h6l9.5-9.5z"/><path d="m13 5 6 6"/><path d="M4 20h6"/></svg>
+            </div>
+            <strong data-i18n="stack.combat.title">Combat systems</strong>
+            <p data-i18n="stack.combat.text">
+              Movesets, combos, cooldowns, hitboxes, blocking and parrying.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+            </div>
+            <strong data-i18n="stack.saves.title">Saving and data</strong>
+            <p data-i18n="stack.saves.text">
+              DataStore and player profiles, data migrations, protection against
+              progress loss.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.5 12.5a2 2 0 0 1-2 1.5H7.5a2 2 0 0 1-2-1.5z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            </div>
+            <strong data-i18n="stack.economy.title">Economy</strong>
+            <p data-i18n="stack.economy.text">
+              Currencies, shops, crafting, gacha, leaderboards and limited items.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg>
+            </div>
+            <strong data-i18n="stack.ui.title">Interfaces</strong>
+            <p data-i18n="stack.ui.text">
+              Inventory, upgrade windows, animated UI and its wiring to the
+              server.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <strong data-i18n="stack.security.title">Security and performance</strong>
+            <p data-i18n="stack.security.text">
+              Server-side validation against exploits, profiling and lower server
+              load.
+            </p>
+          </article>
+        </div>
+        <p class="stack-note" data-reveal data-i18n-html="stack.note">
+          <span>Not taking</span>
+          FPS shooters, vehicles — cars and aircraft — and mechanics with complex
+          geometry. For those you are better off with a specialist.
+        </p>
+      </section>
+
+      <section class="how payment" id="payment">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="payment.kicker">Payment</span>
+          <h2 data-i18n="payment.title">How payment works</h2>
+        </div>
+        <div class="how-steps" data-reveal>
+          <div><span>01</span><p data-i18n="payment.step1">You place the order, I start building the system.</p></div>
+          <div><span>02</span><p data-i18n="payment.step2">When the work is finished, I send you a video walkthrough of how everything works.</p></div>
+          <div><span>03</span><p data-i18n="payment.step3">You share your feedback, and I make any tweaks.</p></div>
+          <div class="payment-featured">
+            <span>04</span>
+            <p data-i18n="payment.step4">After the tweaks, you make the payment.</p>
+            <small data-i18n="payment.step4note">You pay only after you've confirmed that everything works.</small>
+          </div>
+          <div><span>05</span><p data-i18n="payment.step5">After payment, I send you the .rbxl file or transfer the system into your place.</p></div>
+          <div><span>06</span><p data-i18n="payment.step6">You test it, and I make the final adjustments.</p></div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="faq.kicker">FAQ</span>
+          <h2 data-i18n="faq.title">Common questions</h2>
+        </div>
+        <div class="faq-list" data-reveal>
+          <details>
+            <summary data-i18n="faq.q1">Why are there only three videos?</summary>
+            <p data-i18n="faq.a1">
+              I have worked on a lot of projects, but almost no recordings
+              survived: some games shut down, some material stayed with the
+              clients. I only show work I did myself and can back with a full
+              recording.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q2">What do you not take on?</summary>
+            <p data-i18n="faq.a2">
+              FPS shooters and vehicles — cars and aircraft. Everything else —
+              simulators, combat systems, economy, progression, interfaces — I do.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q3">What do you write in?</summary>
+            <p data-i18n="faq.a3">
+              Luau in Roblox Studio. Modular architecture, with all the important
+              logic and checks on the server so the mechanic cannot be broken
+              from the client.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q4">How long does it take?</summary>
+            <p data-i18n="faq.a4">
+              A small system takes one to three days. A large mechanic or a full
+              simulator, a week or more. I give an exact estimate once we have
+              gone through the task.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q5">What do you need to start?</summary>
+            <p data-i18n="faq.a5">
+              Describe the task and send references on Discord. I will come back
+              with timing, price and a suggestion for a simpler way to build the
+              mechanic.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q6">Do you sign NDAs?</summary>
+            <p data-i18n="faq.a6">Yes, no problem. If you have your own template, send it over and we'll go through the details.</p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q7">Do you work for revenue share?</summary>
+            <p data-i18n="faq.a7">Usually no, I work on fixed payment. In some cases I consider it on an individual basis, if the project is worth it.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="contact-card" data-reveal>
+          <div class="contact-copy">
+            <span class="section-kicker" data-i18n="contact.kicker">Contact</span>
+            <h2 data-i18n="contact.title">
+              Let’s build the mechanic your game is missing
+            </h2>
+            <p data-i18n="contact.lead">
+              Message me on Discord — I reply within a day. Tell me what you need
+              and attach a reference if you have one.
+            </p>
+          </div>
+          <div class="contact-action">
+            <span class="contact-label">Discord</span>
+            <a class="primary" href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer" data-i18n="contact.cta">
+              Message on Discord
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-line">
+          <a class="brand" href="#top">
+            <img class="app-brand-icon" src="favicon.svg?v=33cba8b" alt="" />
+            <span>VitalyWorks</span>
+          </a>
+          <nav aria-label="Sections" data-i18n-aria="a11y.sections">
+            <a href="#works" data-i18n="nav.works">Work</a>
+            <a href="#stack" data-i18n="nav.stack">What I do</a>
+            <a href="#payment" data-i18n="nav.payment">Payment</a>
+            <a href="#faq" data-i18n="nav.faq">FAQ</a>
+          </nav>
+        </div>
+        <p class="footer-copy" data-i18n="footer.copy">
+          © 2026 VitalyWorks · Roblox Studio scripter · Discord: vitalyworks
+        </p>
+      </footer>
+    </main>
+
+    <div class="video-modal hidden" id="videoModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-video></div>
+      <section
+        class="modal-panel video-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="videoTitle"
+      >
+        <div class="modal-head">
+          <h2 id="videoTitle" data-i18n="modal.title">Work</h2>
+          <button
+            class="ghost icon-close"
+            type="button"
+            data-close-video
+            aria-label="Close"
+            data-i18n-aria="a11y.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="video-frame">
+          <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+      </section>
+    </div>
+
+    <script src="i18n.js?v=20260810-2"></script>
+    <script src="app.js?v=20260810-2"></script>
+  </body>
+</html>
