@@ -1,292 +1,430 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d1018">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>VitalyWorks · Roblox Studio (Luau)</title>
-<meta name="description" content="VitalyWorks · custom game systems for Roblox Studio in Luau. You pay only after you’ve confirmed that everything works.">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kyronixes — Roblox Studio scripter</title>
+    <meta
+      name="description"
+      content="Roblox Studio scripter with four years of experience. Simulators, combat systems, movesets, economy and saves in Luau."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="kyronixes — Roblox Studio scripter" />
+    <meta
+      property="og:description"
+      content="Four years in Luau. Simulators, combat systems and game mechanics built end to end."
+    />
+    <meta property="og:image" content="media/posters/hero.jpg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<!-- YouTube thumbnails referenced from JS (ytThumb) — lifted here for the
-     offline bundler. hqdefault is used (always present); at runtime each maps
-     to a blob URL on window.__resources. -->
-
-<!-- Onest: full Cyrillic + Latin across all weights — used for everything. -->
-<!-- Instrument Serif: flowing display serif, used ONLY for the payment step numerals. -->
-<!-- Static utility shim — the exact subset of utility classes this page uses.
-     Replaces the Tailwind Play CDN so the page works fully offline with no
-     network dependency. Keep in sync with markup if classes are added. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin,latin-ext">
-<link rel="stylesheet" href="styles.css">
-</head>
-
-<body class="antialiased">
-
-<div class="atmosphere" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
-<div class="edge-lift" aria-hidden="true"></div>
-
-<!-- ─────────────────────────  NAV  ───────────────────────── -->
-<header class="fixed top-4 inset-x-0 z-50 px-4 dof">
-  <div class="max-w-6xl mx-auto">
-    <nav class="nav-bar rounded-full flex items-center gap-2 pl-4 pr-2 py-2">
-      <a href="#top" aria-label="VitalyWorks" class="flex items-center">
-        <span class="wordmark"><span class="wm-dot"></span>VitalyWorks</span>
-      </a>
-
-      <div id="navLinks" class="hidden md:flex items-center gap-0.5 mx-auto">
-        <a href="#services" class="nav-link" data-i18n="nav_services">Услуги</a>
-        <a href="#work" class="nav-link" data-i18n="nav_work">Работы</a>
-        <a href="#process" class="nav-link" data-i18n="nav_process">Как проходит оплата</a>
-        <a href="#contact" class="nav-link" data-i18n="nav_contact">Связь со мной</a>
-      </div>
-
-      <div class="ml-auto md:ml-0 flex items-center gap-2">
-        <div class="relative">
-          <button id="langBtn" class="icon-btn" aria-haspopup="menu" aria-expanded="false" aria-label="Language" data-i18n-aria="aria_lang">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
-          </button>
-          <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
-            <button data-lang="ru" aria-pressed="false">Русский <span class="code">RU</span></button>
-            <button data-lang="en" aria-pressed="true">English <span class="code">EN</span></button>
-          </div>
-        </div>
-
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" data-i18n-aria="aria_theme">
-          <svg id="iconMoon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
-          <svg id="iconSun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-        </button>
-
-        <button id="mobMenuBtn" class="icon-btn md:hidden" aria-label="Menu" aria-expanded="false" data-i18n-aria="aria_menu">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
-        </button>
-
-        <a class="btn btn-primary py-2 px-4 text-sm hidden sm:inline-flex" href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer" data-i18n="nav_cta">
-          Discord
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <main class="site">
+      <header class="topbar">
+        <a class="brand" href="#top">
+          <img class="app-brand-icon" src="favicon.svg" alt="" />
+          <span>kyronixes</span>
         </a>
-      </div>
-    </nav>
-
-    <div id="mobMenu" class="mob-menu md:hidden" role="menu" aria-label="Mobile menu">
-      <a href="#services" data-i18n="nav_services">Услуги <span class="arr">→</span></a>
-      <a href="#work" data-i18n="nav_work">Работы <span class="arr">→</span></a>
-      <a href="#process" data-i18n="nav_process">Как проходит оплата <span class="arr">→</span></a>
-      <a href="#contact" data-i18n="nav_contact">Связь со мной <span class="arr">→</span></a>
-      <a href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer" data-i18n="nav_cta">Discord <span class="arr">↗</span></a>
-    </div>
-  </div>
-</header>
-
-<!-- ─────────────────────────  HERO  ───────────────────────── -->
-<section id="top" data-screen-label="Hero" class="relative hero dof">
-  <div class="relative z-10 w-full max-w-6xl mx-auto px-6">
-    <div class="max-w-4xl">
-      <h1 class="display display-xl" data-reveal="" data-i18n="hero_h">
-        Создам игровую систему для Roblox Studio под любой запрос и сложность.
-      </h1>
-
-      <p class="mt-5 max-w-2xl lead" data-reveal="" style="--reveal-delay: 100ms" data-i18n="hero_lead">
-        Принимаю заказы на разработку игровых систем в Roblox Studio (Luau). Выполняю задачи любой сложности, от лёгких заказов до комплексных систем. Уделяю особое внимание качеству кода, чтобы обеспечить его стабильную работу и совместимость с остальными элементами проекта. Опыт разработки более 2 лет.
-      </p>
-
-      <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal="" style="--reveal-delay: 180ms">
-        <span class="magnetic">
-          <a href="#work" class="btn btn-primary" data-i18n="hero_cta">Посмотреть работы</a>
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────  SERVICES — do / don't  ───────────────────────── -->
-<section id="services" data-screen-label="Services" class="sec relative z-10" style="background: color-mix(in oklab, var(--bg-tint), transparent 45%)">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="sec-head" data-reveal="">
-      <h2 class="h display display-lg" data-i18n="services_h">Что я делаю и за что не берусь</h2>
-    </div>
-
-    <div class="svc-grid">
-      <!-- What I do -->
-      <div class="surface svc-card" data-reveal="">
-        <div class="svc-head">
-          <span class="svc-ic do">✓</span>
-          <span class="svc-h" data-i18n="services_do_h">Что я делаю</span>
+        <nav class="topnav" aria-label="Sections" data-i18n-aria="a11y.sections">
+          <a href="#works" data-i18n="nav.works">Work</a>
+          <a href="#stack" data-i18n="nav.stack">What I do</a>
+          <a href="#process" data-i18n="nav.process">Process</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        </nav>
+        <div class="top-actions">
+          <div
+            class="lang-switch"
+            role="group"
+            aria-label="Language"
+            data-i18n-aria="a11y.language"
+          >
+            <button type="button" class="lang-option" data-lang="en">EN</button>
+            <button type="button" class="lang-option" data-lang="ru">RU</button>
+          </div>
+          <a class="primary compact-auth" href="#contact" data-i18n="nav.cta">
+            Message on Discord
+          </a>
         </div>
-        <ul class="svc-list">
-          <li><span class="mk do">✓</span><span data-i18n="do_1">Игровая логика и поведение NPC</span></li>
-          <li><span class="mk do">✓</span><span data-i18n="do_2">Системы прогрессии и внутренней экономики</span></li>
-          <li><span class="mk do">✓</span><span data-i18n="do_3">Инвентарь и системы предметов</span></li>
-          <li><span class="mk do">✓</span><span data-i18n="do_4">Защита от читов и читерства</span></li>
-          <li><span class="mk do">✓</span><span data-i18n="do_5">Пользовательский интерфейс (UI)</span></li>
-        </ul>
-      </div>
+      </header>
 
-      <!-- What I don't take on -->
-      <div class="surface svc-card" data-reveal="" style="--reveal-delay: 100ms">
-        <div class="svc-head">
-          <span class="svc-ic dont">X</span>
-          <span class="svc-h" data-i18n="services_dont_h">За что не берусь</span>
-        </div>
-        <ul class="svc-list">
-          <li><span class="mk dont">X</span><span data-i18n="dont_1">Боевые системы и системы оружия</span></li>
-          <li><span class="mk dont">X</span><span data-i18n="dont_2">Механики со сложной геометрией</span></li>
-        </ul>
-        <p class="svc-note" data-i18n="dont_note">Я не специализируюсь на боевых системах. Если вам нужна качественная механика боя или оружия, рекомендую обратиться к разработчику, который занимается именно этим направлением.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────  WORK  ───────────────────────── -->
-<section id="work" data-screen-label="Work" class="sec relative z-10">
-  <div class="max-w-card mx-auto px-6">
-    <div class="sec-head" data-reveal="">
-      <h2 class="h display display-lg" data-i18n="work_h">Мои работы</h2>
-      <p class="sec-sub" data-i18n="work_lead">
-        Каждый проект сопровождается видеодемонстрацией: нажмите на превью, чтобы посмотреть его.
-      </p>
-    </div>
-    <div class="glass work-card focus-glow" data-reveal="">
-      <div class="work-list" id="workList"></div>
-      <div class="work-extra" id="workExtra"><div><div class="work-list" id="workExtraList"></div></div></div>
-      <button class="show-more" id="workToggle" aria-expanded="false">
-        <span class="lbl" data-i18n="work_more">Показать ещё</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────  PROCESS  ───────────────────────── -->
-<section id="process" data-screen-label="Process" class="sec relative z-10" style="background: color-mix(in oklab, var(--bg-tint), transparent 45%)">
-  <div class="max-w-card mx-auto px-6">
-    <div class="sec-head" data-reveal="">
-      <h2 class="h display display-md" data-i18n="proc_h">Как проходит оплата</h2>
-    </div>
-    <div class="glass proc-card focus-glow" data-reveal="">
-      <ol class="proc-list">
-        <li class="proc-row"><span class="ix">01</span><span class="tx" data-i18n="proc_1">Вы совершаете заказ, я разрабатываю систему.</span></li>
-        <li class="proc-row"><span class="ix">02</span><span class="tx" data-i18n="proc_2">После окончания работы я присылаю вам видео, детальный показ проделанной работы.</span></li>
-        <li class="proc-row"><span class="ix">03</span><span class="tx" data-i18n="proc_3">Вы говорите своё мнение, мы вносим правки.</span></li>
-        <li class="proc-row key">
-          <span class="ix">04</span>
-          <span class="tx">
-            <span data-i18n="proc_4">После внесения правок вы производите оплату.</span>
-            <span class="proc-note" data-i18n="proc_4_note">Оплачиваете только после того, как убедитесь, что всё работает.</span>
+      <section class="hero" id="top">
+        <div class="hero-copy" data-reveal>
+          <span class="hero-badge">
+            <i></i><span data-i18n="hero.badge">Open for commissions</span>
           </span>
-        </li>
-        <li class="proc-row"><span class="ix">05</span><span class="tx" data-i18n="proc_5">После оплаты я высылаю вам rbxl файл или переношу систему в ваш плейс.</span></li>
-        <li class="proc-row"><span class="ix">06</span><span class="tx" data-i18n="proc_6">Вы тестируете, и я вношу финальные правки.</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
+          <h1 data-i18n-html="hero.title">
+            I build <em>Roblox mechanics</em> that hold up
+          </h1>
+          <p data-i18n="hero.lead">
+            Four years writing game mechanics in Luau: simulators, combat
+            systems, progression and economy. I build logic that runs on the
+            server and holds up under load.
+          </p>
+          <div class="hero-actions">
+            <a class="primary hero-button" href="#works" data-i18n="hero.ctaPrimary">
+              View work
+            </a>
+            <a class="secondary hero-button" href="#contact" data-i18n="hero.ctaSecondary">
+              Start a project
+            </a>
+          </div>
+          <ul class="hero-points">
+            <li>
+              <strong data-i18n="hero.point1.title">4 years</strong>
+              <span data-i18n="hero.point1.text">In Roblox Studio</span>
+            </li>
+            <li>
+              <strong data-i18n="hero.point2.title">Simulators</strong>
+              <span data-i18n="hero.point2.text">Main specialization</span>
+            </li>
+            <li>
+              <strong data-i18n="hero.point3.title">Luau</strong>
+              <span data-i18n="hero.point3.text">Modular server-side code</span>
+            </li>
+          </ul>
+        </div>
+        <div class="hero-shot" aria-hidden="true">
+          <div class="shot-frame">
+            <img src="media/posters/hero.jpg" alt="" />
+          </div>
+        </div>
+      </section>
 
-<!-- ─────────────────────────  CONTACT — single flat glass  ───────────────────────── -->
-<section id="contact" data-screen-label="Contact" class="sec relative z-10">
-  <div class="max-w-card mx-auto px-6">
-    <div class="sec-head" data-reveal="">
-      <h2 class="h display display-lg" data-i18n="contact_h">Связь со мной</h2>
-      <p class="sec-sub" data-i18n="contact_lead">Напишите мне в Discord, отвечу быстро.</p>
-    </div>
-    <div class="glass contact-block focus-glow is-focal" data-reveal="">
-      <div class="contact-grid">
-        <!-- LEFT: Discord + Languages -->
-        <div class="contact-left">
-          <div class="c-sub">
-            <div class="c-label" data-i18n="contact_discord_label">Discord</div>
-            <div class="c-handle" id="discordHandle" title="vitalyworks">vitalyworks</div>
-            <div class="c-btn-wrap">
-              <a class="btn btn-primary c-btn" href="https://discord.com/users/1398466959669985432" target="_blank" rel="noopener noreferrer">
-                <span data-i18n="contact_btn">Перейти в Discord</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              </a>
+      <section class="works" id="works">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="works.kicker">Work</span>
+          <h2 data-i18n="works.title">
+            Built end to end. See every system in action
+          </h2>
+          <p data-i18n="works.lead">
+            Three solo projects I still have footage of. Click a card to watch
+            the video.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/combat-framework.mp4"
+            data-title-key="works.combat.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/combat-framework.jpg"
+                alt="Ability-based combat system with cooldowns and VFX"
+                data-i18n-alt="works.combat.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">1:18</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.combat.title">Ability-based combat system</strong>
+              <span class="work-text" data-i18n="works.combat.text">
+                A four-slot hotbar with independent cooldowns, a stamina bar and
+                dummies with damage and health bars. Every ability is its own
+                module: animation, hitbox, effects and its own recovery phase.
+              </span>
+              <span class="work-tags" data-i18n-html="works.combat.tags">
+                <em>Combat</em><em>Cooldowns</em><em>Hitboxes</em><em>VFX</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/sukuna-moveset.mp4"
+            data-title-key="works.moveset.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/sukuna-moveset.jpg"
+                alt="Character moveset in the Culling Grounds project"
+                data-i18n-alt="works.moveset.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:30</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.moveset.title">
+                Character moveset — Culling Grounds
+              </strong>
+              <span class="work-text" data-i18n="works.moveset.text">
+                A full ability set for one character: dash, block, Cleave,
+                Dismantle, Spider Web and Dissolve. Animations, effects and
+                hitboxes run through one state controller so moves never
+                conflict.
+              </span>
+              <span class="work-tags" data-i18n-html="works.moveset.tags">
+                <em>Moveset</em><em>State machine</em><em>Animation</em>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="work-card"
+            type="button"
+            data-reveal
+            data-video="media/stands-bob.mp4"
+            data-title-key="works.stands.title"
+          >
+            <span class="work-shot">
+              <img
+                src="media/posters/stands-bob.jpg"
+                alt="Stand summoning and combo system in Roblox Studio"
+                data-i18n-alt="works.stands.alt"
+                loading="lazy"
+              />
+              <span class="work-play" aria-hidden="true"></span>
+              <span class="work-duration">0:28</span>
+            </span>
+            <span class="work-body">
+              <strong data-i18n="works.stands.title">Stand and combo system</strong>
+              <span class="work-text" data-i18n="works.stands.text">
+                Stand summoning, M1 chains with a combo counter, barrage, heavy
+                punch and block. Damage is calculated on the server and the combo
+                resets on timeout — visible right in the Studio test session.
+              </span>
+              <span class="work-tags" data-i18n-html="works.stands.tags">
+                <em>Combo</em><em>Server-side</em><em>Roblox Studio</em>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <p class="works-note" data-reveal data-i18n="works.note">
+          Some of the projects I worked on in teams shut down or stayed under
+          NDA, so no footage survived. What is here is solo work I can show in
+          full.
+        </p>
+      </section>
+
+      <section class="features" id="stack">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="stack.kicker">Specialization</span>
+          <h2 data-i18n="stack.title">Mechanics I build</h2>
+          <p data-i18n="stack.lead">
+            Every system is written as a module, so it can be extended or
+            switched off without touching the rest of the game.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 3h-5m5 0v5"/></svg>
             </div>
-          </div>
+            <strong data-i18n="stack.simulators.title">Simulators</strong>
+            <p data-i18n="stack.simulators.text">
+              Progression, rebirths, multipliers, zones, pets and a balanced
+              growth curve.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5 5 13v6h6l9.5-9.5z"/><path d="m13 5 6 6"/><path d="M4 20h6"/></svg>
+            </div>
+            <strong data-i18n="stack.combat.title">Combat systems</strong>
+            <p data-i18n="stack.combat.text">
+              Movesets, combos, cooldowns, hitboxes, blocking and parrying.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+            </div>
+            <strong data-i18n="stack.saves.title">Saving and data</strong>
+            <p data-i18n="stack.saves.text">
+              DataStore and player profiles, data migrations, protection against
+              progress loss.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.5 12.5a2 2 0 0 1-2 1.5H7.5a2 2 0 0 1-2-1.5z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+            </div>
+            <strong data-i18n="stack.economy.title">Economy</strong>
+            <p data-i18n="stack.economy.text">
+              Currencies, shops, crafting, gacha, leaderboards and limited items.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg>
+            </div>
+            <strong data-i18n="stack.ui.title">Interfaces</strong>
+            <p data-i18n="stack.ui.text">
+              Inventory, upgrade windows, animated UI and its wiring to the
+              server.
+            </p>
+          </article>
+          <article class="feature-card" data-reveal>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <strong data-i18n="stack.security.title">Security and performance</strong>
+            <p data-i18n="stack.security.text">
+              Server-side validation against exploits, profiling and lower server
+              load.
+            </p>
+          </article>
+        </div>
+        <p class="stack-note" data-reveal data-i18n-html="stack.note">
+          <span>Not taking</span>
+          FPS shooters and vehicles — cars and aircraft. For those you are better
+          off with a specialist.
+        </p>
+      </section>
 
-          <div class="c-sub c-block-gap">
-            <div class="c-label" data-i18n="contact_langs_label">Языки общения</div>
-            <div class="c-langs" data-i18n="contact_langs_list">Английский, русский</div>
+      <section class="how" id="process">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="process.kicker">Process</span>
+          <h2 data-i18n="process.title">How the work goes</h2>
+        </div>
+        <div class="how-steps" data-reveal>
+          <div>
+            <span>01</span>
+            <p data-i18n="process.step1">We go through the task, references and deadlines</p>
+          </div>
+          <div>
+            <span>02</span>
+            <p data-i18n="process.step2">I build a prototype to test the mechanic</p>
+          </div>
+          <div>
+            <span>03</span>
+            <p data-i18n="process.step3">I write the final version in modules and test it</p>
+          </div>
+          <div>
+            <span>04</span>
+            <p data-i18n="process.step4">I hand over the source and fix your notes</p>
           </div>
         </div>
+      </section>
 
-        <!-- RIGHT: live clock -->
-        <div class="c-sub clock-col">
-          <div class="c-label"><span data-i18n="contact_clock_label">Моё время</span> · <span data-i18n="contact_clock_tz">МСК</span></div>
-          <div class="clock-num" id="liveClock">--:--:--</div>
-          <div class="avail-row">
-            <span class="pulse-dot" id="availDot"></span>
-            <span class="availability-text" id="availabilityText"></span>
+      <section class="faq" id="faq">
+        <div class="section-title" data-reveal>
+          <span class="section-kicker" data-i18n="faq.kicker">FAQ</span>
+          <h2 data-i18n="faq.title">Common questions</h2>
+        </div>
+        <div class="faq-list" data-reveal>
+          <details>
+            <summary data-i18n="faq.q1">Why are there only three videos?</summary>
+            <p data-i18n="faq.a1">
+              I have worked on a lot of projects, but almost no recordings
+              survived: some games shut down, some material stayed with the
+              clients. I only show work I did myself and can back with a full
+              recording.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q2">What do you not take on?</summary>
+            <p data-i18n="faq.a2">
+              FPS shooters and vehicles — cars and aircraft. Everything else —
+              simulators, combat systems, economy, progression, interfaces — I do.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q3">What do you write in?</summary>
+            <p data-i18n="faq.a3">
+              Luau in Roblox Studio. Modular architecture, with all the important
+              logic and checks on the server so the mechanic cannot be broken
+              from the client.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q4">How long does it take?</summary>
+            <p data-i18n="faq.a4">
+              A small system takes one to three days. A large mechanic or a full
+              simulator, a week or more. I give an exact estimate once we have
+              gone through the task.
+            </p>
+          </details>
+          <details>
+            <summary data-i18n="faq.q5">What do you need to start?</summary>
+            <p data-i18n="faq.a5">
+              Describe the task and send references on Discord. I will come back
+              with timing, price and a suggestion for a simpler way to build the
+              mechanic.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="contact-card" data-reveal>
+          <div class="contact-copy">
+            <span class="section-kicker" data-i18n="contact.kicker">Contact</span>
+            <h2 data-i18n="contact.title">
+              Let’s build the mechanic your game is missing
+            </h2>
+            <p data-i18n="contact.lead">
+              Message me on Discord — I reply within a day. Tell me what you need
+              and attach a reference if you have one.
+            </p>
+          </div>
+          <div class="contact-action">
+            <span class="contact-label">Discord</span>
+            <code id="discordHandle">kyronixes</code>
+            <button class="primary" type="button" id="copyDiscordButton" data-i18n="contact.copy">
+              Copy username
+            </button>
+            <p class="message" id="copyMessage" role="status"></p>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-<!-- ─────────────────────────  FAQ  ───────────────────────── -->
-<section id="faq" data-screen-label="FAQ" class="sec relative z-10">
-  <div class="max-w-card mx-auto px-6">
-    <div class="sec-head" data-reveal="">
-      <h2 class="h display display-md" data-i18n="faq_h">Что обычно спрашивают</h2>
-    </div>
-    <div class="surface faq-card" data-reveal="">
-      <div id="faqList"></div>
-    </div>
-  </div>
-</section>
+      <footer class="site-footer">
+        <div class="footer-line">
+          <a class="brand" href="#top">
+            <img class="app-brand-icon" src="favicon.svg" alt="" />
+            <span>kyronixes</span>
+          </a>
+          <nav aria-label="Sections" data-i18n-aria="a11y.sections">
+            <a href="#works" data-i18n="nav.works">Work</a>
+            <a href="#stack" data-i18n="nav.stack">What I do</a>
+            <a href="#process" data-i18n="nav.process">Process</a>
+            <a href="#faq" data-i18n="nav.faq">FAQ</a>
+          </nav>
+        </div>
+        <p class="footer-copy" data-i18n="footer.copy">
+          © 2026 kyronixes · Roblox Studio scripter · Discord: kyronixes
+        </p>
+      </footer>
+    </main>
 
-<!-- ─────────────────────────  FOOTER  ───────────────────────── -->
-<footer style="border-top: 1px solid var(--border)" class="py-9 relative z-10">
-  <div class="max-w-6xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4 text-[14px]" style="color: var(--soft); font-weight: 500">
-    <div>© <span id="yr">2026</span> VitalyWorks</div>
-    <div class="flex items-center gap-6">
-      <a href="#top" class="link-u hover:text-fg" data-i18n="footer_top">Наверх ↑</a>
+    <div class="video-modal hidden" id="videoModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-video></div>
+      <section
+        class="modal-panel video-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="videoTitle"
+      >
+        <div class="modal-head">
+          <h2 id="videoTitle" data-i18n="modal.title">Work</h2>
+          <button
+            class="ghost icon-close"
+            type="button"
+            data-close-video
+            aria-label="Close"
+            data-i18n-aria="a11y.close"
+          >
+            ×
+          </button>
+        </div>
+        <div class="video-frame">
+          <video id="videoPlayer" controls playsinline preload="metadata"></video>
+        </div>
+      </section>
     </div>
-  </div>
-</footer>
 
-<!-- Tweaks panel -->
-<aside id="tweaks" class="tw-panel" role="dialog" aria-label="Tweaks">
-  <div class="flex items-center justify-between mb-2">
-    <div class="text-sm font-semibold">Tweaks</div>
-    <button id="twClose" class="text-xs font-medium" style="color: var(--soft)">close ✕</button>
-  </div>
-  <div class="hairline mb-2"></div>
-  <div class="tw-row"><div class="tw-label">Theme</div><div class="tw-grp" id="twTheme"></div></div>
-  <div class="tw-row"><div class="tw-label">Accent</div><div class="tw-grp" id="twAccents"></div></div>
-  <div class="tw-row"><div class="tw-label">Motion</div><div class="tw-grp" id="twMotion"></div></div>
-  <div class="tw-row"><div class="tw-label">Depth blur</div><div class="tw-grp" id="twDof"></div></div>
-  <div class="tw-row">
-    <div class="tw-label">Edge lift</div>
-    <div class="tw-grp" style="align-items:center; flex-wrap:nowrap">
-      <input type="range" min="0" max="100" step="1" value="50" class="tw-slider" id="twEdgeLift" aria-label="Edge lift">
-      <span class="tw-slider-val" id="twEdgeLiftVal">50%</span>
-    </div>
-  </div>
-</aside>
-
-<!-- Lightbox -->
-<div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center p-6 lightbox" role="dialog" aria-modal="true" aria-label="Video preview">
-  <div class="lb-panel" id="lbPanel">
-    <div class="lb-titlebar">
-      <div class="lb-dots">
-        <button id="lbClose" class="lb-dot red" type="button" aria-label="Close"></button>
-        <span class="lb-dot yellow" aria-hidden="true"></span>
-        <span class="lb-dot green" aria-hidden="true"></span>
-      </div>
-      <div class="lb-title" id="lbTitle"></div>
-    </div>
-    <div id="lbBody" class="lb-body"></div>
-  </div>
-</div>
-
-<!-- Copy toast -->
-<div id="copyToast" class="copy-toast" role="status" aria-live="polite">
-  <span class="dot"></span><span id="copyToastText"></span>
-</div>
-
-<script src="script.js" defer></script>
-</body></html>
+    <script src="i18n.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

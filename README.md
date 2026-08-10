@@ -1,32 +1,64 @@
-# vitalyworks.github.io
+# kyronixes — портфолио
 
-Personal portfolio site for VitalyWorks — Roblox Studio (Luau) commission work.
+Статичный сайт-портфолио скриптера Roblox Studio. Без сборки и зависимостей:
+обычные HTML, CSS и JavaScript.
 
-Live: https://vitalyworks.github.io/
+## Структура
 
-## Files
+```
+index.html            разметка страницы
+style.css             стили (тёмная тема, шрифты Unbounded / Manrope / JetBrains Mono)
+i18n.js                английские и русские тексты, английский язык по умолчанию
+app.js                прогресс скролла, появление блоков, модалка с видео, копирование ника
+favicon.svg           иконка сайта
+fonts/                локальные шрифты
+media/                видео работ, сжатые для веба
+media/posters/        превью для карточек и фон первого экрана
+_originals/           исходные записи до сжатия, на сайт не выкладываются
+```
 
-- `index.html` — markup
-- `styles.css` — all styles
-- `script.js` — site logic (i18n, theme/tweaks, live clock, lightbox, show-more)
-- `assets/` — (reserved for future static assets)
+## Локальный запуск
 
-## Editing
+Открыть `index.html` в браузере достаточно для просмотра, но видео и шрифты
+надёжнее работают через локальный сервер:
 
-### Quick text edits
-Open the relevant file on GitHub, click the pencil icon, edit, and commit. The site rebuilds automatically.
+```powershell
+python -m http.server 8000
+```
 
-### Adding a portfolio project
-1. Open `script.js`
-2. Find the `const PROJECTS = [` array
-3. Copy one of the existing project entries (a `{ n: '..', yt: '..', ru: {...}, en: {...} }` block) and paste it as a new entry in the order you want it shown
-4. Update `n` (display number), `yt` (YouTube video ID — the 11-char string from the video URL), `ru.t` / `ru.b` (Russian title/body), and `en.t` / `en.b` (English title/body)
-5. Commit. The thumbnail loads automatically from `i.ytimg.com`.
+Затем открыть <http://localhost:8000>.
 
-## Tech stack
+## Как добавить новую работу
 
-- Vanilla HTML / CSS / JS — no build step
-- Fonts: Onest via Google Fonts (Latin + Cyrillic subsets)
-- Video lightbox: lazy-loaded YouTube nocookie embeds, maxresdefault thumbnails with hqdefault fallback
-- Themes: light / dark + Tweaks panel (accent, edge lift, motion intensity)
-- i18n: English (default) + Russian
+1. Сжать запись для веба и положить результат в `media/`:
+
+```powershell
+ffmpeg -i "запись.mp4" -c:v libx264 -preset slow -crf 25 -pix_fmt yuv420p `
+  -c:a aac -b:a 128k -movflags +faststart media/new-system.mp4
+```
+
+`crf` управляет качеством: меньше значение — лучше картинка и больше файл.
+Разумный диапазон 21–26. Флаг `+faststart` обязателен, без него браузер
+скачивает весь файл перед началом воспроизведения.
+
+2. Сделать превью из кадра ролика:
+
+```powershell
+ffmpeg -ss 12 -i media/new-system.mp4 -frames:v 1 -vf scale=1280:-1 -q:v 3 media/posters/new-system.jpg
+```
+
+3. Скопировать в `index.html` любой блок `<button class="work-card" ...>` внутри
+   `.work-grid` и заменить в нём:
+   - `data-video` — путь к ролику,
+   - `data-title` — заголовок в модальном окне,
+   - `src` и `alt` у `<img>` — превью,
+   - `.work-duration` — длительность,
+   - заголовок, описание и теги.
+
+## Правка контента
+
+- Ник Discord задан в `index.html` в элементе `<code id="discordHandle">`
+  и в подписи футера.
+- Тексты сайта правятся в `i18n.js`; одинаковые ключи нужно обновлять в словарях
+  `en` и `ru`. Английский используется по умолчанию, выбор пользователя запоминается.
+- Цвета темы — переменные в начале `style.css` (блок `:root`).
